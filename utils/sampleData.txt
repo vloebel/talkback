@@ -1,0 +1,19 @@
+// Some sample data for pasting into insomnia for testing
+
+// POST http://localhost:3001//api/user
+{
+  "username": "vloebel",
+  "email": "vloebel@hotmail.com"
+}
+{
+  "username": "hdresden",
+  "email": "hdresden@gmail.com"
+}
+{
+  "username": "mabarker",
+  "email": "gatmama@gmail.com"
+}
+{
+  "username": "tjefferson",
+  "email": "president2@gmail.com"
+}

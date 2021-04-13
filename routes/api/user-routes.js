@@ -15,7 +15,7 @@ const {
 // (U2)	GET a single user by  _id and populated thought and friend data
 // (U3)	POST a new user in the format:
 //     {
-//       "username": "vloebel",
+//      "username": "vloebel",
 //      "email": "vloebel@hotmail.com"
 //    }
 // (U4)	PUT to update a user by  _id
