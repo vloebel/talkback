@@ -1,3 +1,6 @@
+// This function is taken from ua web developer bootcamp
+// Module 18 source code
+
 const addDateSuffix = date => {
   let dateStr = date.toString();
 
