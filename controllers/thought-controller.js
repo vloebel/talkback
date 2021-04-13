@@ -2,7 +2,7 @@ const { Comment, Pizza } = require('../models');
 
 const commentController = {
   // add comment to pizza
-  addComment({ params, body }, res) {
+  addThought({ params, body }, res) {
     console.log(params);
     Comment.create(body)
       .then(({ _id }) => {
@@ -24,7 +24,7 @@ const commentController = {
   },
 
   // add reply to comment
-  addReply({ params, body }, res) {
+  addReaction({ params, body }, res) {
     Comment.findOneAndUpdate(
       { _id: params.commentId },
       { $push: { replies: body } },
@@ -41,7 +41,7 @@ const commentController = {
   },
 
   // remove comment
-  removeComment({ params }, res) {
+  removeThought({ params }, res) {
     Comment.findOneAndDelete({ _id: params.commentId })
       .then(deletedComment => {
         if (!deletedComment) {
@@ -63,7 +63,7 @@ const commentController = {
       .catch(err => res.json(err));
   },
   // remove reply
-  removeReply({ params }, res) {
+  removeReaction({ params }, res) {
     Comment.findOneAndUpdate(
       { _id: params.commentId },
       { $pull: { replies: { replyId: params.replyId } } },

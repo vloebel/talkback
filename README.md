@@ -5,7 +5,9 @@
   ## UA Web Coding Bootcamp Challenge - Week 18 
   
   ## Description  
-  This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing.  
+  This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing.    
+   
+  Source code for this project is based on the University of Arizona's Web Developer Bootcamp, Module 18, and is subject to that program's copyright and restrictions.
 
   ### Link to YouTube Walkthrough
   [talkback demo part 1] tbd    

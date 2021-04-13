@@ -1,3 +1,5 @@
+// server code adapted from UA web development bootcamp
+// module 18
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -8,13 +10,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/pizza-hunt', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/talk-back', {
   useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-// Use this to log mongo queries being executed!
+// log mongo queries
 mongoose.set('debug', true);
 
 app.use(require('./routes'));
