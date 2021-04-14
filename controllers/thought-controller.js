@@ -1,4 +1,25 @@
+// This project is adapted directly from the source code for
+// UA web developer bootcamp Module 18, and is subject to 
+// that program's copyright and licensing
+
 const { Thought, User } = require('../models');
+
+// /api/thoughts ROUTES
+// Done:
+// TBD:
+// (T1)	GET to get all thoughts
+// (T2)	GET to get a single thought by its _id
+// (T3)	POST to create a new thought 
+//(don't forget to push the created thought's _id to the 
+// associated user's thoughts array field)
+// SAMPLE data: {
+//   "thoughtText": "Here's a cool thought...",
+//   "username": "vloebel",
+//   "userId": "5edff358a0fcb779aa7b118b"
+// }
+// (T4) PUT to update a thought by  _id
+// (T5)	DELETE to remove a thought by  _id
+
 
 const thoughtController = {
   // add thought to user

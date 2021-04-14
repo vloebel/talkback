@@ -1,8 +1,10 @@
-const { Schema, model } = require('mongoose');
+// This project is adapted directly from the source code for
+// UA web developer bootcamp Module 18, and is subject to 
+// that program's copyright and licensingconst { Schema, model } = require('mongoose');
 
 const UserSchema = new Schema(
   {
-    userName: {
+    username: {
       type: String,
       unique: true,
       required: true,
@@ -39,7 +41,7 @@ const UserSchema = new Schema(
 
 // get total count of friends on retrieval
 UserSchema.virtual('friendCount').get(function() {
-  return this.friends.length + 1;
+  return this.friends.length;
 });
 
 const User = model('User', UserSchema);

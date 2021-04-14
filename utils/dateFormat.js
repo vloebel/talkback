@@ -1,5 +1,6 @@
-// This function is taken from ua web developer bootcamp
-// Module 18 source code
+// This project is adapted directly from the source code for
+// UA web developer bootcamp Module 18, and is subject to 
+// that program's copyright and licensing
 
 const addDateSuffix = date => {
   let dateStr = date.toString();

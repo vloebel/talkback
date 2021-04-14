@@ -1,12 +1,42 @@
+// This project is adapted directly from the source code for
+// UA web developer bootcamp Module 18, and is subject to 
+// that program's copyright and licensing
+
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-
-const ThoughtSchema = new Schema(
+const ReactionSchema = new Schema(
   {
+      reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId()
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxLength: 280
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: createdAtVal => dateFormat(createdAtVal)
+    }
+  },
+  {
+    toJSON: {
+      getters: true
+    }
+  }
+);
+
+const ThoughtSchema = new Schema({
     thoughtText: {
       type: String,
-      maxlength: 280,
+      maxLength: 280,
       required: true,
       trim: true
     },
@@ -20,13 +50,8 @@ const ThoughtSchema = new Schema(
       required: true,
     },
 
-  reactons: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Reaction'
-    }
-  ]
-},
+  reactons: [ReactionSchema]
+  },
   {
     toJSON: {
       virtuals: true,
@@ -37,9 +62,10 @@ const ThoughtSchema = new Schema(
   }
 );
 
-// get total count of friends on retrieval
-UserSchema.virtual('reactionCount').get(function() {
-  return this.reactions.length + 1;
+// get total count of reactions - question
+// why not +1? 
+ThoughtSchema.virtual('reactionCount').get(function() {
+  return this.reactions.length;
 });
 
 const Thought = model('Thought', ThoughtSchema);
