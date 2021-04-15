@@ -2,7 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
   ![banner](./assets/rm-banner.jpg)
   # talk-back: a social network API/back end
-  ## UA Web Coding Bootcamp Challenge - Week 18 
+  ## UA Web Coding Bootcamp Challenge - Week 18
   
   ## Description  
   This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing.    
