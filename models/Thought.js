@@ -2,7 +2,7 @@
 // UA web developer bootcamp Module 18, and is subject to 
 // that program's copyright and licensing
 
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const ReactionSchema = new Schema(
