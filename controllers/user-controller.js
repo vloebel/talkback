@@ -4,27 +4,28 @@
 
 const { User } = require('../models');
 
-
-// /api/users 
-// (U1) getAllUsers: GET all users
-// (U2) createUser: POST new user in the format:
+// * /api/users 
+// (U1) getAllUsers
+// (U2) addUser: ADD new user in the format:
 //     {"username": "vloebel", "email": "vloebel@hotmail.com" 
 //
-// /api/users/:id  
-// (U3)	getUserById: GET single user by  _id and populate thought and friend data
-// (U4)	updateUser : PUT to update user by  _id
-// (U5)	deleteUser:  DELETE to remove user by  _id
+// * /api/users/<userId> 
+// (U3)	getUserById: GET single user by id 
+//       and populate thought and friend data
+// (U4)	updateUser : PUT to update user by id
+// (U5)	deleteUser:  DELETE  user by id
+//
 // TBD: (bonus) Remove a user's associated thoughts on delete
 //
-// /api/users/:userId/friends/:friendId
-// (U6) POST add a new friend to a user's friend list
-// (U7)	DELETE to remove a friend from a user's friend list
-/////////////////////////////////////////
-// /api/users
-/////////////////////////////////////////
+// * api/users/<userId>/friends/<friendId>
+// (U6) addFriend: POST new friend to a user's friend list
+// (U7)	removeFriend: DELETE friend from a user's friend list
+//      DELETE api/users/<userId>/friends/<friendId>
+
 const userController = {
 
-  // (U1) getAllUsers: GET all users
+  // (U1) getAllUsers
+  //   GET /api/users
   getAllUsers(req, res) {
     User.find({})
       .populate({
@@ -44,18 +45,20 @@ const userController = {
       });
   },
 
-  // (U2) createUser: POST new user in the format:
-  //     {"username": "vloebel", "email": "vloebel@hotmail.com" }
-  createUser({ body }, res) {
+  // (U2) addUser: 
+  //   POST /api/users
+  //   BODY FORMAT {
+  //     "username": "vloebel", 
+  //     "email": "vloebel@hotmail.com" }
+  addUser({ body }, res) {
     User.create(body)
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.json(err));
   },
-  /////////////////////////////////////////
-  // /api/users/:id
-  /////////////////////////////////////////
-  // (U3)	getUserById: GET single user by  _id  
-  //      and populate thought and friend data
+  
+  // (U3)	getUserById
+  //   GET /api/users/<userId>
+  //   and populate thought and friend data
 
   getUserById({ params }, res) {
     User.findOne({ _id: params.id })
@@ -81,9 +84,9 @@ const userController = {
       });
   },
 
-  // (U4)	updateUser : PUT to update user by  _id
-  //      data format:
-  //     {"username": "vloebel", "email": "vloebel@hotmail.com" }
+  // (U4)	updateUser by userId
+  //  PUT /api/users/<userId> 
+  // { "username": "vloebel", "email": "vloebel@hotmail.com" }
 
   updateUser({ params, body }, res) {
     User.findOneAndUpdate(
@@ -100,9 +103,8 @@ const userController = {
       .catch(err => res.json(err));
   },
 
-  // (U5)	deleteUser:  DELETE to remove user by  _id
-  // TBD: For Bonus - This is a function call, so can't 
-  //  we delete the thoughts first, then the user?
+  // (U5)	deleteUser by userId
+  //  DELETE /api/users/<userId> 
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
       .then(dbUserData => {
@@ -115,14 +117,11 @@ const userController = {
       .catch(err => res.json(err));
   },
 
-  ////////////////////////////////////////////
-  // /api/users/:userId/friends/:friendId
-  ////////////////////////////////////////////
 
-  // (U6) POST add a new friend to a user's friend list
-  // xxxx? - does runvalidators guarantee the friend
-  // exists, or do we need to validate separately?
-
+// * FRIENDS
+  
+// (U6) Add new friend to a user's friend list
+//  POST api/users/<userId>/friends/<friendId>
   addFriend({ params }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
@@ -139,7 +138,9 @@ const userController = {
       .catch(err => res.json(err));
   },
 
-  // (U7)	DELETE to remove a friend from a user's friend list
+
+// (U7)	Remove friend from a user's friend list
+//  DELETE api/users/<userId>/friends/<friendId>
 
   removeFriend({ params }, res) {
     User.findOneAndUpdate(
@@ -157,6 +158,5 @@ const userController = {
       .catch(err => res.json(err));
   },
 }
-
 
 module.exports = userController;
