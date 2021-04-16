@@ -24,7 +24,7 @@ router
   .get(getAllUsers)
   .post(addUser);
 
-// * /api/users/<id> 
+// * /api/users/<userId> 
 // user-controller functions:
 // (U3)	getUserById: GET single user by id 
 //       and populate thought and friend data
@@ -41,8 +41,8 @@ router
 // (U6) Add new friend to a user's friend list
 // (U7)	Remove friend from a user's friend list
 router
-  .route('/:userId/friends/friendId')
-  .post(addFriend)
+  .route('/:userId/friends/:friendId')
+  .put(addFriend)
   .delete(removeFriend);
 
 

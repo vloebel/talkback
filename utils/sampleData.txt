@@ -1,19 +1,44 @@
 // Some sample data for pasting into insomnia for testing
+// Test script
+// 4/16/2021
+//////////////////////////////////
+// USER ROUTES: USERS & FRIENDS
+/////////////////////////////////////////////
+(1) POST add user
+http://localhost:3001/api/user
 
-// POST http://localhost:3001//api/user
-{
-  "username": "vloebel",
-  "email": "vloebel@hotmail.com"
-}
-{
-  "username": "hdresden",
-  "email": "hdresden@gmail.com"
-}
 {
   "username": "mabarker",
   "email": "gatmama@gmail.com"
 }
+
+(2) GET All Users
+http://localhost:3001/api/users
+
+(3)  GET user by id
+http://localhost:3001/api/users/6078be0afb74a45a209eb427 
+
+(4) PUT - update user by id change vloebel to vickyloebel
+http://localhost:3001/api/users/6078be0afb74a45a209eb427 
 {
-  "username": "tjefferson",
-  "email": "president2@gmail.com"
+  "username": "vickyloebel"
 }
+
+(5) DELETE - user by id
+(do a get and pick one but not vloebel or vickysfriend)
+
+/////////////////////////////////////////////
+// ADDING AND DELETING A FRIEND
+/////////////////////////////////////////////
+
+(6) PUT Add Friend (add VickysFriend to vloebel)
+// * api/users/<userId>/friends/<friendId>
+     (then)
+(7) DELETE exactly same data
+http://localhost:3001/api/users/6078be0afb74a45a209eb427/friends/6078c3ccfb74a45a209eb42b
+
+/////////////////////////////////////////////
+// THOUGHTS & REACTIONS
+/////////////////////////////////////////////
+
+

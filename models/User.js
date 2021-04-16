@@ -2,6 +2,8 @@
 // UA web developer bootcamp Module 18, and is subject to 
 // that program's copyright and licensingconst { Schema, model } = require('mongoose');
 
+const { Schema, model, Types } = require('mongoose');
+
 const UserSchema = new Schema(
   {
     username: {

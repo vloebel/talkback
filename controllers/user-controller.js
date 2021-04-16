@@ -6,8 +6,12 @@ const { User } = require('../models');
 
 // * /api/users 
 // (U1) getAllUsers
-// (U2) addUser: ADD new user in the format:
-//     {"username": "vloebel", "email": "vloebel@hotmail.com" 
+//   GET /api/users
+// (U2) addUser: 
+//   POST /api/users
+//   BODY FORMAT {
+//     "username": "vloebel", 
+//     "email": "vloebel@hotmail.com" }
 //
 // * /api/users/<userId> 
 // (U3)	getUserById: GET single user by id 
@@ -18,7 +22,7 @@ const { User } = require('../models');
 // TBD: (bonus) Remove a user's associated thoughts on delete
 //
 // * api/users/<userId>/friends/<friendId>
-// (U6) addFriend: POST new friend to a user's friend list
+// (U6) addFriend: update user's friend list with new friend
 // (U7)	removeFriend: DELETE friend from a user's friend list
 //      DELETE api/users/<userId>/friends/<friendId>
 
@@ -55,7 +59,7 @@ const userController = {
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.json(err));
   },
-  
+
   // (U3)	getUserById
   //   GET /api/users/<userId>
   //   and populate thought and friend data
@@ -118,11 +122,13 @@ const userController = {
   },
 
 
-// * FRIENDS
-  
-// (U6) Add new friend to a user's friend list
-//  POST api/users/<userId>/friends/<friendId>
+  // * FRIENDS
+
+  // (U6) Add new friend to a user's friend list
+  //  PUT api/users/<userId>/friends/<friendId>
   addFriend({ params }, res) {
+    console.log(`addFriend params: ${params}`);
+
     User.findOneAndUpdate(
       { _id: params.userId },
       { $push: { friends: params.friendId } },
@@ -130,7 +136,8 @@ const userController = {
     )
       .then(dbUserData => {
         if (!dbUserData) {
-          res.status(404).json({ message: `No user found with id: ${params.id}` });
+          res.status(404)
+            .json({ message: `No user found with id: ${params.id}` });
           return;
         }
         res.json(dbUserData);
@@ -139,8 +146,8 @@ const userController = {
   },
 
 
-// (U7)	Remove friend from a user's friend list
-//  DELETE api/users/<userId>/friends/<friendId>
+  // (U7)	Remove friend from a user's friend list
+  //  DELETE api/users/<userId>/friends/<friendId>
 
   removeFriend({ params }, res) {
     User.findOneAndUpdate(
