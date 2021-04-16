@@ -42,7 +42,7 @@ router
 // (U7)	Remove friend from a user's friend list
 router
   .route('/:userId/friends/:friendId')
-  .put(addFriend)
+  .post(addFriend)
   .delete(removeFriend);
 
 

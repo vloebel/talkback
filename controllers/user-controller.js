@@ -22,7 +22,7 @@ const { User } = require('../models');
 // TBD: (bonus) Remove a user's associated thoughts on delete
 //
 // * api/users/<userId>/friends/<friendId>
-// (U6) addFriend: update user's friend list with new friend
+// (U6) addFriend: POST new friend to user's friend list
 // (U7)	removeFriend: DELETE friend from a user's friend list
 //      DELETE api/users/<userId>/friends/<friendId>
 
@@ -42,7 +42,7 @@ const userController = {
       })
       .select('-__v')
       .sort({ _id: -1 })
-      .then(dbUserData => res.json(dbUserData))
+      .then(dbData => res.json(dbData))
       .catch(err => {
         console.log(err);
         res.sendStatus(400);
@@ -56,7 +56,7 @@ const userController = {
   //     "email": "vloebel@hotmail.com" }
   addUser({ body }, res) {
     User.create(body)
-      .then(dbUserData => res.json(dbUserData))
+      .then(dbData => res.json(dbData))
       .catch(err => res.json(err));
   },
 
@@ -75,12 +75,13 @@ const userController = {
         select: '-__v'
       })
       .select('-__v')
-      .then(dbUserData => {
-        if (!dbUserData) {
-          res.status(404).json({ message: `No user found with id: ${params.id}` });
+      .then(dbData => {
+        if (!dbData) {
+          res.status(404)
+            .json({ message: `No user found with id: ${params.id}` });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbData);
       })
       .catch(err => {
         console.log(err);
@@ -97,12 +98,12 @@ const userController = {
       { _id: params.id }, body,
       { new: true, runValidators: true }
     )
-      .then(dbUserData => {
-        if (!dbUserData) {
+      .then(dbData => {
+        if (!dbData) {
           res.status(404).json({ message: `No user found with id: ${params.id}` });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbData);
       })
       .catch(err => res.json(err));
   },
@@ -111,12 +112,12 @@ const userController = {
   //  DELETE /api/users/<userId> 
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
-      .then(dbUserData => {
-        if (!dbUserData) {
+      .then(dbData => {
+        if (!dbData) {
           res.status(404).json({ message: `No user found with id: ${params.id}` });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbData);
       })
       .catch(err => res.json(err));
   },
@@ -125,7 +126,7 @@ const userController = {
   // * FRIENDS
 
   // (U6) Add new friend to a user's friend list
-  //  PUT api/users/<userId>/friends/<friendId>
+  //  POST api/users/<userId>/friends/<friendId>
   addFriend({ params }, res) {
     console.log(`addFriend params: ${params}`);
 
@@ -134,13 +135,13 @@ const userController = {
       { $push: { friends: params.friendId } },
       { new: true, runValidators: true }
     )
-      .then(dbUserData => {
-        if (!dbUserData) {
+      .then(dbData => {
+        if (!dbData) {
           res.status(404)
             .json({ message: `No user found with id: ${params.id}` });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbData);
       })
       .catch(err => res.json(err));
   },
@@ -155,12 +156,12 @@ const userController = {
       { $pull: { friends: params.friendId } },
       { new: true }
     )
-      .then(dbUserData => {
-        if (!dbUserData) {
+      .then(dbData => {
+        if (!dbData) {
           res.status(404).json({ message: `No user found with id: ${params.id}` });
           return;
         }
-        res.json(dbUserData);
+        res.json(dbData);
       })
       .catch(err => res.json(err));
   },

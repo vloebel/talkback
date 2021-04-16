@@ -8,14 +8,14 @@ const UserSchema = new Schema(
   {
     username: {
       type: String,
-      unique: true,
-      required: true,
+      unique: `That username is not available.`,
+      required: `Please enter your username: `,
       trim: true
     },
     email: {
       type: String,
-      unique: true,
-      required: true,
+      unique: `That email is already in use.`,
+      required: `Please enter a valid email: `,
       match: [/.+@.+\..+/, 'Please enter a valid e-mail']
     },
     thoughts: [

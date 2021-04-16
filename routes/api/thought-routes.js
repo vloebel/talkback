@@ -24,7 +24,8 @@ router
 // * /api/thoughts/<userid>
 // Thought-controller function:
 //   (T2) Create a new thought for a user
-router.route('/:userId')
+router
+  .route('/:userId')
   .post(addThought)
 
 // * /api/thoughts/<thoughtId>

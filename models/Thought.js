@@ -14,11 +14,13 @@ const ReactionSchema = new Schema(
     reactionBody: {
       type: String,
       required: true,
+      trim:true,
       maxLength: 280
     },
     username: {
       type: String,
-      required: true
+      required: true,
+      trim:true
     },
     createdAt: {
       type: Date,
@@ -36,8 +38,8 @@ const ReactionSchema = new Schema(
 const ThoughtSchema = new Schema({
     thoughtText: {
       type: String,
+      required: `What are you thinking?`,
       maxLength: 280,
-      required: true,
       trim: true
     },
     createdAt: {
@@ -45,12 +47,13 @@ const ThoughtSchema = new Schema({
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
     },
-    userName: {
+    username: {
       type: String,
-      required: true,
+      required: `please enter your username`,
+      trim: true
     },
 
-  reactons: [ReactionSchema]
+  reactions: [ReactionSchema]
   },
   {
     toJSON: {
