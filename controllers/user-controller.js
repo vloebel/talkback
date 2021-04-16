@@ -111,16 +111,33 @@ const userController = {
   // (U5)	deleteUser by userId
   //  DELETE /api/users/<userId> 
   deleteUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.id })
+    User.findOne({ _id: params.id })
+      .then(dbData => {
+        console.log('dbData ' + dbData);
+        // if this user has thoughts
+        // delete the thoughts whose _id is in the array
+        if (dbData.thoughts && dbData.thoughts.length >= 1) {
+          const delStatus = await Thought.deleteMany({ _id: { $in: dbData.thoughts } });
+          console.log('delStatus ' + delStatus);
+        }
+        console.log ('Second dbData ' + dbData);
+        return (dbData);
+
+      })
+      // then delete the user
+    .then (dbData => {
+    
+    User.findOneAndDelete(dbData._id)
       .then(dbData => {
         if (!dbData) {
-          res.status(404).json({ message: `No user found with id: ${params.id}` });
+          res.status(404).json({ message: `No user found with id: ${dbData._id}` });
           return;
         }
         res.json(dbData);
       })
       .catch(err => res.json(err));
-  },
+})
+},
 
 
   // * FRIENDS

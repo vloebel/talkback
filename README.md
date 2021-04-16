@@ -5,9 +5,7 @@
   ## UA Web Coding Bootcamp Challenge - Week 18
   
   ## Description  
-  This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing.    
-   
-  Source code for this project is based on the University of Arizona's Web Developer Bootcamp, Module 18, and is subject to that program's copyright and restrictions.
+  This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing. It is based on source code for  the University of Arizona's Web Developer Bootcamp, Module 18, and is subject to that program's copyright and restrictions.
 
   ### Link to YouTube Walkthrough
   [talkback demo part 1] tbd    
@@ -34,7 +32,7 @@
   * To start the server: 
     type "npm start" on the terminal command line.   
   * To interface with the server:  
-    Start a desktop app such as [Insomnia](https://insomnia.rest/) and use the API methods it provides with your server or http://localhost:3001.
+    Start a desktop app such as [Insomnia](https://insomnia.rest/) and use the API methods it provides at http://localhost:3001.
 
   ## User_Story 
  * AS A social media startup
@@ -51,10 +49,8 @@
   * WHEN I test API POST and DELETE routes in Insomnia Cores  
     THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list  
  
+  ![Insomnia Screenshot](./assets/insomnia.capture.jpg)
 
-  ![Insomnia Screenshot] TBD
-
-   
   ## Questions
   For more information, contact  
   * [vloebel on GitHub](https://github.com/vloebel)  
