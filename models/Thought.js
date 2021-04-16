@@ -38,19 +38,19 @@ const ReactionSchema = new Schema(
 const ThoughtSchema = new Schema({
     thoughtText: {
       type: String,
-      required: `What are you thinking?`,
+      required: `Let's hear what you're thinking:`,
       maxLength: 280,
+      trim: true
+    },
+    username: {
+      type: String,
+      required: `please enter your username`,
       trim: true
     },
     createdAt: {
       type: Date,
       default: Date.now,
       get: createdAtVal => dateFormat(createdAtVal)
-    },
-    username: {
-      type: String,
-      required: `please enter your username`,
-      trim: true
     },
 
   reactions: [ReactionSchema]

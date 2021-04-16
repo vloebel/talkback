@@ -2,7 +2,7 @@
 // UA web developer bootcamp Module 18, and is subject to 
 // that program's copyright and licensing
 
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 // * /api/users 
 // (U1) getAllUsers
@@ -41,7 +41,7 @@ const userController = {
         select: '-__v'
       })
       .select('-__v')
-      .sort({ _id: -1 })
+      // .sort({ _id: -1 })
       .then(dbData => res.json(dbData))
       .catch(err => {
         console.log(err);
@@ -111,12 +111,14 @@ const userController = {
   // (U5)	deleteUser by userId
   //  DELETE /api/users/<userId> 
   deleteUser({ params }, res) {
-    User.findOne({ _id: params.id })
-      .then(dbData => {
+    User.findOne( { _id: params.id })
+      .then(async dbData => {
         console.log('dbData ' + dbData);
+        
         // if this user has thoughts
         // delete the thoughts whose _id is in the array
-        if (dbData.thoughts && dbData.thoughts.length >= 1) {
+        if (dbData.thoughts && dbData.thoughts.length) {
+          console.log('dbData.thoughts ' + dbData.thoughts);
           const delStatus = await Thought.deleteMany({ _id: { $in: dbData.thoughts } });
           console.log('delStatus ' + delStatus);
         }
