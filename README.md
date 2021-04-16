@@ -29,19 +29,12 @@
     * [express.js](https://expressjs.com/)    
     * [mongoDb](https://www.mongodb.com/)    
     * [mongoose](https://www.npmjs.com/package/mongoose)    
-
-
-  3.  INITIALIZE THE DATABASE  xxxxx
-    
-
-  4.  SEED THE DATABASE  
-      xxxx
     
   ## Usage  
   * To start the server: 
     type "npm start" on the terminal command line.   
   * To interface with the server:  
-    Start a desktop app such as [Insomnia](https://insomnia.rest/) and use the API methods it provides with localhost:3001. XXXX
+    Start a desktop app such as [Insomnia](https://insomnia.rest/) and use the API methods it provides with your server or http://localhost:3001.
 
   ## User_Story 
  * AS A social media startup
