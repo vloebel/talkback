@@ -58,7 +58,6 @@ http://localhost:3001/api/thoughts/6078be0afb74a45a209eb427
 {
   "thoughtText": "Let's learn MongoDB",
   "username": "cc",
-  "userId": "6078df52166409571c3bc25f" 
 }
 http://localhost:3001/api/thoughts/6078be0afb74a45a209eb427
 {

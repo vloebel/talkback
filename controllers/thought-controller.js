@@ -50,8 +50,7 @@ const thoughtController = {
   //      SAMPLE BODY { 
   //        "thoughtText": "Let's learn MongoDB",
   //        "username": "vloebel",
-  //        "userId": "5edff358a0fcb779aa7b118b" }
-  // 
+  
   addThought({ params, body }, res) {
     Thought.create(body)
       .then(({ _id }) => {
@@ -152,7 +151,6 @@ const thoughtController = {
   //      DELETE /api/thoughts/reactions/<reactionId>
 
   removeReaction({ params }, res) {
-    console.log (`about to delete: ${params.thoughtId}`)
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $pull: { reactions: { reactionId: params.reactionId } } },

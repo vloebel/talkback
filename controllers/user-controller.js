@@ -98,6 +98,7 @@ const userController = {
       { _id: params.id }, body,
       { new: true, runValidators: true }
     )
+      .select('-__v')
       .then(dbData => {
         if (!dbData) {
           res.status(404).json({ message: `No user found with id: ${params.id}` });
@@ -110,50 +111,37 @@ const userController = {
 
   // (U5)	deleteUser by userId
   //  DELETE /api/users/<userId> 
+  //  also delete any thoughts the user has recorded
+  //  don't set "new:true" - we need the thoughts array to delete
   deleteUser({ params }, res) {
-    User.findOne( { _id: params.id })
+    User.findOneAndDelete({ _id: params.id })
+      .select('-__v')
       .then(async dbData => {
-        console.log('dbData ' + dbData);
-        
-        // if this user has thoughts
-        // delete the thoughts whose _id is in the array
-        if (dbData.thoughts && dbData.thoughts.length) {
-          console.log('dbData.thoughts ' + dbData.thoughts);
-          const delStatus = await Thought.deleteMany({ _id: { $in: dbData.thoughts } });
-          console.log('delStatus ' + delStatus);
-        }
-        console.log ('Second dbData ' + dbData);
-        return (dbData);
-
-      })
-      // then delete the user
-    .then (dbData => {
-    
-    User.findOneAndDelete(dbData._id)
-      .then(dbData => {
         if (!dbData) {
-          res.status(404).json({ message: `No user found with id: ${dbData._id}` });
+          res.status(404).json({ message: `No user found with id: ${params.id}` });
           return;
+        }
+        // The thoughts array has ids of this user's Thought objects
+        // delete all those Thought obects along with this user 
+        if (dbData.thoughts && dbData.thoughts.length) {
+          const deleteManyStatus = await Thought.deleteMany({ _id: { $in: dbData.thoughts } });
         }
         res.json(dbData);
       })
       .catch(err => res.json(err));
-})
 },
-
 
   // * FRIENDS
 
   // (U6) Add new friend to a user's friend list
   //  POST api/users/<userId>/friends/<friendId>
   addFriend({ params }, res) {
-    console.log(`addFriend params: ${params}`);
-
     User.findOneAndUpdate(
       { _id: params.userId },
       { $push: { friends: params.friendId } },
       { new: true, runValidators: true }
     )
+      .select('-__v')
       .then(dbData => {
         if (!dbData) {
           res.status(404)
@@ -165,7 +153,6 @@ const userController = {
       .catch(err => res.json(err));
   },
 
-
   // (U7)	Remove friend from a user's friend list
   //  DELETE api/users/<userId>/friends/<friendId>
 
@@ -175,6 +162,7 @@ const userController = {
       { $pull: { friends: params.friendId } },
       { new: true }
     )
+      .select('-__v')
       .then(dbData => {
         if (!dbData) {
           res.status(404).json({ message: `No user found with id: ${params.id}` });
