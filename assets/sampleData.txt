@@ -7,10 +7,10 @@
 // USER ROUTES: USERS & FRIENDS
 /////////////////////////////////////////////
 
-(1) GET ALL USERS
+(1) GET ALL USERS -
 http://localhost:3001/api/users
 
-(2) POST ADD USER
+(2) POST ADD USER -
 http://localhost:3001/api/users
 
 {
@@ -20,18 +20,19 @@ http://localhost:3001/api/users
 
 (2.5) POST it a SECOND TIME TO SHOW ERROR
 
-(3)  GET USER BY ID
+(3)  GET USER BY ID -
 http://localhost:3001/api/users/6078be0afb74a45a209eb427 
+-that's me; I have one thought and a couple of reactions
 
 (3.5)  CHANGE LAST DIGIT AND GET AGAIN TO SHOW ERROR
 
-(4) PUT - update user by id change vloebel to vickyloebel
+(4) PUT - update user by id change vloebel to vickyloebel and then change back
 http://localhost:3001/api/users/6078be0afb74a45a209eb427 
 {
   "username": "vickyloebel"
 }
 
-(5) DELETE - user by id
+(5) DELETE - user by id -
 (do a get and pick one but not vloebel or vickysfriend)
 --DELETE FIRST WTIH WRONG DIGIT AT END THEN FOR REAL
 -- DO A GET TO SHOW THEY'RE GONE
@@ -42,6 +43,10 @@ http://localhost:3001/api/users/6078be0afb74a45a209eb427
 
 (6) POST to ADD FRIEND (add VickysFriend to vloebel)
 http://localhost:3001/api/users/6078be0afb74a45a209eb427/friends/6078c3ccfb74a45a209eb42b
+
+GET to show delete 
+
+http://localhost:3001/api/users/6078be0afb74a45a209eb427
  (then)
 (7) DELETE exactly same data
 http://localhost:3001/api/users/6078be0afb74a45a209eb427/friends/6078c3ccfb74a45a209eb42b
@@ -50,35 +55,36 @@ http://localhost:3001/api/users/6078be0afb74a45a209eb427/friends/6078c3ccfb74a45
 // THOUGHTS & REACTIONS
 /////////////////////////////////////////////
 
-(8) GET ALL THOUGHTS
+(8) GET ALL THOUGHTS `
 http://localhost:3001/api/thoughts
 
-(9) POST CREATE THOUGHT (added to vloebel)
-http://localhost:3001/api/thoughts/6078be0afb74a45a209eb427
+(9)  GET THOUGHT BY ID `
+http://localhost:3001/api/thoughts/607a3c86d79feb3784b42771
+(LET'S LEARN MONGODB) 
+
+(9.5)  CHANGE LAST DIGIT AND GET AGAIN TO SHOW ERROR
+
+
+(10) POST CREATE THOUGHT (added to mabarker) `
+http://localhost:3001/api/thoughts/607a4274c09e9b3100e29242
 {
-  "thoughtText": "Let's learn MongoDB",
-  "username": "cc",
+  "thoughtText": "Your MongoDB or your life!",
+  "username": "mamabarker"
 }
-http://localhost:3001/api/thoughts/6078be0afb74a45a209eb427
-{
-  "thoughtText": "How about those Mets!",
-  "username": "cc",
-  "userId": "6078df52166409571c3bc25f" 
-}
+
 
     POINT OUT THE TIMESTAMPS
 
 
-(10)  GET THOUGHT BY ID
-http://localhost:3001/api/thoughts/6078e2174115492200a10980
-(LET'S LEARN MONGODB) 
-
-(10.5)  CHANGE LAST DIGIT AND GET AGAIN TO SHOW ERROR
       
-(11) PUT - CHANGE THE DIGIT BACK FOR UPDATE THOUGHT BY ID 
-{ "thoughtText": "I want to visit the zoo" }
+(11) PUT - 
+http://localhost:3001/api/thoughts/607a483ac09e9b3100e29246
 
-(12) DELETE - THOUGHT by id
+change to        Let's learn MongoDB
+
+(12) DELETE - THOUGHT by id `
+
+http://localhost:3001/api/thoughts/607a3ca1d79feb3784b42773
 (do a get and pick one but not let's Learn Mongo)
 --DELETE FIRST WTIH WRONG DIGIT AT END THEN FOR REAL
 -- DO A GET TO SHOW THEY'RE GONE
@@ -87,13 +93,22 @@ http://localhost:3001/api/thoughts/6078e2174115492200a10980
 // ADDING AND DELETING REACTONS
 /////////////////////////////////////////////
 
+http://localhost:3001/api/thoughts/607a3ca9d79feb3784b42774/reactions    
 (13) POST Add Reacton ()
-http://localhost:3001/api/thoughts/6078e2174115492200a10980/reactions
-    {
-      "reactionBody":"I've heard it's great with mongoose",
-      "username": "ee"
-    }
+{
+  "reactionBody":"Should I ask the gang?",
+  "username": "vloebel"
+}
 
     POINT OUT THE TIMESTAMPS
 
 (14) DELETE - paste the new reaction id and delete
+http://localhost:3001/api/thoughts/607a3ca9d79feb3784b42774/reactions/607a3d9fd79feb3784b42776   
+
+
+
+BONUS DELETE USER and show thoughts are GONE
+
+http://localhost:3001/api/users/6078be0afb74a45a209eb427 
+
+http://localhost:3001/api/thoughts

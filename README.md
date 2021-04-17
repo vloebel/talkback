@@ -8,9 +8,10 @@
   This project implements the back-end of a social networking API based on mongoose & MongoDB. [Insomnia](https://insomnia.rest/) or another similar desktop applications can be used for demonstration and testing. It is based on source code for  the University of Arizona's Web Developer Bootcamp, Module 18, and is subject to that program's copyright and restrictions.
 
   ### Link to YouTube Walkthrough
-  [talkback demo part 1] tbd    
-  [talkback demo part 2] tbd   
-  
+  [talkback demo part 1: User Routes](https://youtu.be/txrRT5tkMtU)    
+  [talkback demo part 2: Thought Routes](https://youtu.be/lPIBj_VVjkA)    
+  [talkback demo part 3: Bonus - Deleting a user also deletes the associated thoughts](https://youtu.be/Fm43mTNEgrc)  
+
   
   ## Table of Contents  
   * [Installation](#Installation)  
